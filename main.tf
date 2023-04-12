@@ -24,6 +24,7 @@ resource "aws_ec2_tag" "name-tag" {
 }
 
 
+
 resource "aws_route53_record" "main" {
   zone_id = data.aws_route53_zone.domain.zone_id
   name    = "rabbitmq-${var.env}.${var.dns_domain}"
@@ -31,6 +32,7 @@ resource "aws_route53_record" "main" {
   ttl     = 30
   records = [aws_spot_instance_request.rabbitmq.private_ip]
 }
+
 
 resource "aws_security_group" "main" {
   name        = "rabbitmq-${var.env}"
@@ -66,3 +68,5 @@ resource "aws_security_group" "main" {
     { Name = "rabbitmq-${var.env}" }
   )
 }
+
+
